@@ -1,0 +1,12 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div style="border: 2px solid gray; border-radius: 7px; margin-left: 70px; margin-right: 70px; padding-left: 15px; padding-top: 10px; padding-bottom: 8px;">
+        <h4 style="margin-bottom: 12px;">New Post</h4>
+        <form action="{% url "new post" %}" method="post">
+            {% csrf_token %}
+            <textarea name="text" style="width: 1740px; height: 220px;"></textarea>
+            <input type="submit" class="button">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h1 id="username" style="text-align: center">{{ username }}</h1>
+    <div style="text-align: center">
+        <strong style="font-size: 25px">Followers:</strong>
+        <strong style="font-size: 25px" id="followers">{{ followers }}</strong>
+        <strong style="font-size: 25px"> &nbsp Following: {{ following }}</strong>
+    </div>
+    <br>
+    {% if not currentuser %}
+        {% if follow %}
+            <button id="follow" class="button" style="margin-left: 48.4%">Unfollow</button>
+        {% else %}
+            <button id="follow" class="button" style="margin-left: 48.4%">Follow</button>
+        {% endif %}
+    {% else %}
+        <button id="follow" style="display: none"></button>
+    {% endif %}
+    <div id="posts">
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/profile.js' %}"></script>
+{% endblock %}
