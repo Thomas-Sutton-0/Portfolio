@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+    <hr>
+    {% for listing in listings %}
+        <h3><a class="nav-link" href="listing{{ listing.id }}">{{ listing.title }}:</a></h3>
+        <img src="{{ listing.image }}" alt="No Image" height="400">
+        <br>
+        <br>
+        <h5>£{{ listing.price }}</h5>
+        {{ listing.description }}
+        <hr>
+    {% empty %}
+    {% endfor %}
+{% endblock %}

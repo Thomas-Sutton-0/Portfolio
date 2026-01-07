@@ -1,0 +1,56 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h1>{{ listing.title }}</h1>
+    <img src="{{ listing.image }}" alt="Image not found." height="400">
+    <br>
+    {{ listing.description }}
+    <h3>£{{ newbid }}</h3>
+    <br>
+    {{ bidnum }} bid(s) so far.
+    {% if curUserBid %}
+        Your bid is the current bid.
+    {% endif %}
+    {% if userOwner %}
+        <form action="listing{{ listing.id }}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="action" value="Delete" style="background-color: #1622ff; color: white;">
+        </form>
+        <form action="listing{{ listing.id }}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="action" value="Close Bid" style="background-color: #1622ff; color: white;">
+        </form>
+    {% else %}
+        <form action="listing{{ listing.id }}" method="post">
+            {% csrf_token %}
+            <input type="number" name="newbid" placeholder="Bid" step="0.01" required>
+            <input type="submit" name="action" value="Place Bid" style="background-color: #1622ff; color: white;">
+        </form>
+    {% endif %}
+    {% if not onWatchlist %}
+        <form action="listing{{ listing.id }}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="action" value="Add To Watchlist" style="background-color: #1622ff; color: white;">
+        </form>
+    {% else %}
+        <form action="listing{{ listing.id }}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="action" value="Remove From Watchlist" style="background-color: #1622ff; color: white;">
+        </form>
+    {% endif %}
+    <br>
+    <hr>
+    <form action="listing{{ listing.id }}" method="post">
+        {% csrf_token %}
+        <textarea name="comment" cols="34" style="max-height: 56px; width: 650px">Enter Comment here</textarea>
+        <br>
+        <input type="submit" name="action" value="Post Comment" style="background-color: #1622ff; color: white;">
+    </form>
+    <br>
+    {% for comment in comments %}
+        {{ comment.user.username }}:
+        {{ comment.text }}
+        <br>
+        <br>
+    {% endfor %}
+{% endblock %}

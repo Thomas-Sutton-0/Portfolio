@@ -1,0 +1,10 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h1>Auction Closed</h1>
+    The auction for {{ listing.title }} has ended
+    <br>
+    {% if winner %}
+        Congratulations! You have won the auction!
+    {% endif %}
+{% endblock %}

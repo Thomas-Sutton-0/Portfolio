@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <form action="{% url "newlisting" %}" method="post">
+        {% csrf_token %}
+        <label>
+            Enter the start bid in GBP here:
+            <input type="number" name="startbid" step="0.01">
+            <br>
+            (Optional) Enter the url for an image of the listed item here:
+            <input type="url" name="image">
+            <br>
+            (Optional) Enter category here:
+            <input type="text" name="category" style="max-height: 32px">
+            <br>
+        </label>
+        <br>
+        <label>
+            <textarea name="title" cols="34" style="max-height: 32px">Please enter a title here</textarea>
+        </label>
+        <br>
+        <label>
+            <textarea name="description" cols="200" rows="20">Please enter the description here</textarea>
+        </label>
+        <br>
+        <input type="submit">
+    </form>
+{% endblock %}
